@@ -45,7 +45,8 @@ public class JogadorController {
             time.get().addJogador(jogador.get());
             Time timePersistido = timeService.salva(time.get());
             if(timePersistido.getElenco().contains(jogador.get()));
-                return ResponseEntity.noContent().build();
+                return ResponseEntity.noContent()
+                        .build();
         }
         return ResponseEntity.badRequest().build();
     }
