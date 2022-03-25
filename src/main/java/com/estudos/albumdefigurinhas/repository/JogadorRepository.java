@@ -11,7 +11,4 @@ import java.util.List;
 public interface JogadorRepository extends JpaRepository<Jogador,Long> {
 
     List<Jogador> findAllByPosicao(PosicaoJogador posicaoJogador);
-
-    List<Jogador> findAllByTimeId(Long timeId);
-
 }

@@ -27,7 +27,4 @@ public class TimeService {
         return timeRepository.findById(id);
     }
 
-    public List<Jogador> buscaElencoPorTimeId(Long id){
-        return jogadorRepository.findAllByTimeId(id);
-    }
 }

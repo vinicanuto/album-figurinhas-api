@@ -36,8 +36,6 @@ public class JogadorService {
         Optional<Jogador> jogador = jogadorRepository.findById(jogadorId);
 
         if (jogador.isPresent()){
-            jogador.get().setTime(time);
-
             return jogadorRepository.save(jogador.get());
         }else {
             throw new Exception("Jogador não encontrado");

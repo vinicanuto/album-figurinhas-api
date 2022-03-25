@@ -1,10 +1,8 @@
 package com.estudos.albumdefigurinhas.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import java.util.Calendar;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -21,8 +19,12 @@ public class Time extends UIDEntity{
     @Temporal(TemporalType.DATE)
     private Calendar dataFundacao;
 
-    @OneToMany
-    private Set<Jogador> elenco;
+    @OneToMany(cascade = {CascadeType.ALL})
+    private Set<Jogador> elenco = new java.util.LinkedHashSet<>();
+
+    public void setElenco(Set<Jogador> elenco) {
+        this.elenco = elenco;
+    }
 
     public String getNome() {
         return nome;
@@ -52,7 +54,34 @@ public class Time extends UIDEntity{
         return elenco;
     }
 
-    public void setElenco(Set<Jogador> elenco) {
-        this.elenco = elenco;
+    public void addJogador(Jogador jogador){
+        this.getElenco().add(jogador);
+        jogador.setTime(this);
+    }
+
+
+    @Override
+    public String toString() {
+        return "Time{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", apelido='" + apelido + '\'' +
+                ", dataFundacao=" + dataFundacao +
+                ", uid='" + uid + '\'' +
+                ", uri='" + uri + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Time)) return false;
+        Time time = (Time) o;
+        return nome.equals(time.nome) && Objects.equals(apelido, time.apelido) && dataFundacao.equals(time.dataFundacao);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nome, apelido, dataFundacao);
     }
 }
