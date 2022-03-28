@@ -1,5 +1,7 @@
 package com.estudos.albumdefigurinhas.request;
 
+import com.estudos.albumdefigurinhas.dto.ImagemDTO;
+import com.estudos.albumdefigurinhas.entity.Imagem;
 import com.estudos.albumdefigurinhas.entity.Time;
 
 import javax.persistence.Temporal;
@@ -15,6 +17,16 @@ public class TimeRequest implements Serializable {
 
     @Temporal(TemporalType.DATE)
     private Calendar dataFundacao;
+
+    private ImagemDTO imagem;
+
+    public ImagemDTO getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(ImagemDTO imagem) {
+        this.imagem = imagem;
+    }
 
     public String getNome() {
         return nome;
@@ -45,6 +57,13 @@ public class TimeRequest implements Serializable {
         time.setNome(this.nome);
         time.setApelido(this.apelido);
         time.setDataFundacao(this.dataFundacao);
+        if(this.imagem != null){
+            Imagem imagem = new Imagem();
+            imagem.setUri(this.imagem.getUri());
+            imagem.setUid(this.imagem.getUuid());
+            time.setImagem(imagem);
+        }
+
         return time;
     }
 }

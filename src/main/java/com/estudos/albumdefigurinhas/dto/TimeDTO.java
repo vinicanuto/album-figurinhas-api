@@ -17,7 +17,17 @@ public class TimeDTO implements Serializable {
 
     private Calendar dataFundacao;
 
+    private ImagemDTO imagem;
+
     public TimeDTO() {
+    }
+
+    public ImagemDTO getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(ImagemDTO imagem) {
+        this.imagem = imagem;
     }
 
     public TimeDTO fromEntityToDTO(Time time){
@@ -25,6 +35,7 @@ public class TimeDTO implements Serializable {
         this.nome=time.getNome();
         this.apelido=time.getApelido();
         this.dataFundacao=time.getDataFundacao();
+        this.imagem=time.getImagem() != null ? new ImagemDTO().toDTO(time.getImagem()) : null;
         return this;
     }
 
