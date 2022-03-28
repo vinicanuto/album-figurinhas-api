@@ -1,7 +1,10 @@
 package com.estudos.albumdefigurinhas.request;
 
+import com.estudos.albumdefigurinhas.dto.ImagemDTO;
+import com.estudos.albumdefigurinhas.entity.Imagem;
 import com.estudos.albumdefigurinhas.entity.Jogador;
 import com.estudos.albumdefigurinhas.entity.PosicaoJogador;
+import com.estudos.albumdefigurinhas.entity.Time;
 
 import java.io.Serializable;
 import java.util.Calendar;
@@ -18,6 +21,17 @@ public class JogadorRequest implements Serializable {
 
     private PosicaoJogador posicao;
 
+    public ImagemDTO getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(ImagemDTO imagem) {
+        this.imagem = imagem;
+    }
+
+    private ImagemDTO imagem;
+
+    private Long timeId;
 
     public String getNome() {
         return nome;
@@ -59,6 +73,15 @@ public class JogadorRequest implements Serializable {
         this.posicao = posicao;
     }
 
+
+    public Long getTimeId() {
+        return timeId;
+    }
+
+    public void setTimeId(Long timeId) {
+        this.timeId = timeId;
+    }
+
     public Jogador converteParaJogador(){
         Jogador jogador = new Jogador();
 
@@ -67,7 +90,18 @@ public class JogadorRequest implements Serializable {
         jogador.setNacionalidade(this.nacionalidade);
         jogador.setDataNascimento(this.dataNascimento);
         jogador.setPosicao(this.posicao);
+        if(this.imagem != null){
+            Imagem imagem = new Imagem();
+            imagem.setUid(this.imagem.getUuid());
+            imagem.setUri(this.imagem.getUri());
+            jogador.setImagem(imagem);
+        }
 
+        if(this.timeId != null){
+            Time time = new Time();
+            time.setId(this.timeId);
+            jogador.setTime(time);
+        }
         return jogador;
     }
 }

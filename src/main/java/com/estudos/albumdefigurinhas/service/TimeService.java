@@ -23,6 +23,9 @@ public class TimeService {
         return timeRepository.save(time);
     }
 
+    public List<Time> buscarTodos(){
+        return timeRepository.findAll();
+    }
     public Optional<Time> buscaPorId(Long id){
         return timeRepository.findById(id);
     }

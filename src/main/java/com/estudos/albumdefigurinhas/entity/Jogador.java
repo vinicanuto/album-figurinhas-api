@@ -7,7 +7,7 @@ import java.util.Calendar;
 import java.util.Objects;
 
 @Entity
-public class Jogador extends UIDEntity{
+public class Jogador extends StandardEntity{
 
     public Jogador() {
     }
@@ -35,11 +35,23 @@ public class Jogador extends UIDEntity{
     @Enumerated(EnumType.STRING)
     private PosicaoJogador posicao;
 
+    private String nacionalidade;
+
+    private Imagem imagem;
+
+    public Imagem getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(Imagem imagem) {
+        this.imagem = imagem;
+    }
+
     public void setNacionalidade(String nacionalidade) {
         this.nacionalidade = nacionalidade;
     }
 
-    private String nacionalidade;
+
 
     public void setTime(Time time) {
         this.time = time;

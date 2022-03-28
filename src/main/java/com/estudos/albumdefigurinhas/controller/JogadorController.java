@@ -1,5 +1,6 @@
 package com.estudos.albumdefigurinhas.controller;
 
+import com.estudos.albumdefigurinhas.dto.JogadorDTO;
 import com.estudos.albumdefigurinhas.entity.Jogador;
 import com.estudos.albumdefigurinhas.entity.Time;
 import com.estudos.albumdefigurinhas.request.AdicionaTimeRequest;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("api/v1/jogador")
@@ -26,14 +28,17 @@ public class JogadorController {
     @GetMapping
     public ResponseEntity<?> buscarTodos() {
         List<Jogador> jogadores = jogadorService.buscarTodos();
-        return ResponseEntity.ok(jogadores);
+        List<JogadorDTO> jogadoresDTO = jogadores.stream()
+                .map( jogador -> new JogadorDTO().fromEntityToDTO(jogador))
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(jogadoresDTO);
     }
 
     @PostMapping
     public ResponseEntity<?> salvar(@RequestBody JogadorRequest jogadorRequest) {
         Jogador jogador = jogadorRequest.converteParaJogador();
         jogador = jogadorService.salva(jogador);
-        return ResponseEntity.ok(jogador);
+        return ResponseEntity.ok(new JogadorDTO().fromEntityToDTO(jogador));
     }
 
     @PostMapping("{id}/adicionarTime")

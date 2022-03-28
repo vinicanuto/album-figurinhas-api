@@ -6,7 +6,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-public class Time extends UIDEntity{
+public class Time extends StandardEntity{
 
     public Time() {
 
@@ -22,6 +22,16 @@ public class Time extends UIDEntity{
     @OneToMany(cascade = {CascadeType.ALL})
     private Set<Jogador> elenco = new java.util.LinkedHashSet<>();
 
+    private Imagem imagem;
+
+    public Imagem getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(Imagem imagem) {
+        this.imagem = imagem;
+    }
+
     public void setElenco(Set<Jogador> elenco) {
         this.elenco = elenco;
     }
@@ -29,6 +39,7 @@ public class Time extends UIDEntity{
     public String getNome() {
         return nome;
     }
+
 
     public void setNome(String nome) {
         this.nome = nome;
@@ -67,8 +78,6 @@ public class Time extends UIDEntity{
                 ", nome='" + nome + '\'' +
                 ", apelido='" + apelido + '\'' +
                 ", dataFundacao=" + dataFundacao +
-                ", uid='" + uid + '\'' +
-                ", uri='" + uri + '\'' +
                 '}';
     }
 
