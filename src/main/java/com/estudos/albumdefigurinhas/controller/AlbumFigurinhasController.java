@@ -1,7 +1,6 @@
 package com.estudos.albumdefigurinhas.controller;
 
 import com.estudos.albumdefigurinhas.dto.AlbumDTO;
-import com.estudos.albumdefigurinhas.dto.JogadorDTO;
 import com.estudos.albumdefigurinhas.entity.AlbumFigurinhas;
 import com.estudos.albumdefigurinhas.repository.AlbumFigurinhasRepository;
 import com.estudos.albumdefigurinhas.request.AlbumRequest;
