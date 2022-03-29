@@ -1,5 +1,6 @@
 package com.estudos.albumdefigurinhas.controller;
 
+import com.estudos.albumdefigurinhas.dto.AlbumDTO;
 import com.estudos.albumdefigurinhas.dto.JogadorDTO;
 import com.estudos.albumdefigurinhas.entity.AlbumFigurinhas;
 import com.estudos.albumdefigurinhas.repository.AlbumFigurinhasRepository;
@@ -23,7 +24,8 @@ public class AlbumFigurinhasController {
         AlbumFigurinhas albumFigurinhas = albumRequest.converteParaAlbum();
 
         albumFigurinhas = repository.save(albumFigurinhas);
-        return ResponseEntity.ok(albumFigurinhas);
+        AlbumDTO albumDTO = new AlbumDTO().converteParaDTO(albumFigurinhas);
+        return ResponseEntity.ok(albumDTO);
     }
 
     @GetMapping
