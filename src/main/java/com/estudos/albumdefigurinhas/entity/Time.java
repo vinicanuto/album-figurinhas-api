@@ -12,6 +12,10 @@ public class Time extends StandardEntity{
 
     }
 
+    public Time(Long id) {
+        super.id =id;
+    }
+
     private String nome;
 
     private String apelido;
@@ -86,7 +90,7 @@ public class Time extends StandardEntity{
         if (this == o) return true;
         if (!(o instanceof Time)) return false;
         Time time = (Time) o;
-        return nome.equals(time.nome) && Objects.equals(apelido, time.apelido) && dataFundacao.equals(time.dataFundacao);
+        return id.equals(time.id);
     }
 
     @Override
